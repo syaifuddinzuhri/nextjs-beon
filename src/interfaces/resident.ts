@@ -28,7 +28,7 @@ export interface ResidentData {
   phone: string;
   status: string;
   is_married: string;
-  id_card_photo: string;
+  id_card_photo: File | null;
 }
 
 export interface ResidentMutation<T> extends MutationProps<T>, ResidentData {}

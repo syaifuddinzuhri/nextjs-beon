@@ -6,6 +6,7 @@ import {
   FormControl,
   FormLabel,
   HStack,
+  Image,
   Input,
   InputGroup,
   Radio,
@@ -20,6 +21,7 @@ import { useState, type FC } from "react";
 import { residentValidationSchema } from "../auth/validation";
 import { generateErrorOptions, generateValidationErrors } from "@/utils/common";
 import { useAddResidentMutation } from "@/api/resident";
+import { IconEdit } from "@/assets/index";
 
 const ResidentAdd: FC = () => {
   const toast = useToast();
@@ -29,12 +31,24 @@ const ResidentAdd: FC = () => {
   const [status, setStatus] = useState("permanent");
   const [isMarried, setIsMarried] = useState("0");
   const [formErrors, setFormErrors] = useState<ResidentValidation>();
+  const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>("");
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const selectedFile = event.target.files[0];
+      setFile(selectedFile);
+
+      const imageUrl = URL.createObjectURL(selectedFile);
+      setPreviewUrl(imageUrl);
+    }
+  };
 
   const { isPending: isLoadingResident, mutate: addResident } = useAddResidentMutation({
     name,
     phone,
     is_married: isMarried,
-    id_card_photo: "",
+    id_card_photo: file,
     status,
     onSuccess: () => {
       toast({
@@ -45,6 +59,7 @@ const ResidentAdd: FC = () => {
         position: "top",
         isClosable: true,
       });
+      router.push("/resident");
     },
     onError: (e: any) => toast(generateErrorOptions(e)),
   });
@@ -55,6 +70,7 @@ const ResidentAdd: FC = () => {
       phone,
       is_married: isMarried,
       status,
+      id_card_photo: file,
     };
     setFormErrors(undefined);
     residentValidationSchema
@@ -133,6 +149,35 @@ const ResidentAdd: FC = () => {
               </Box>
             </RadioGroup>
             {!isEmpty(formErrors?.status) && <ErrorMessage text={formErrors?.status.message} />}
+          </FormControl>
+          <FormControl isInvalid={!isEmpty(formErrors?.id_card_photo)}>
+            <FormLabel>Foto KTP</FormLabel>
+            <Box
+              boxShadow={"0px 2px 15px 0px rgba(38, 51, 77, 0.15)"}
+              width="fit-content"
+              mx="auto"
+              position={"relative"}
+            >
+              <Box bg="white">
+                <Image borderRadius="md" width={"250px"} src={previewUrl || "/images/ktp.png"} alt="images" mb={4} />
+              </Box>
+              <FormLabel
+                htmlFor="upload-img"
+                bg="white"
+                position="absolute"
+                right={"10px"}
+                bottom={"10px"}
+                padding={0.5}
+                m={0}
+                borderRadius={100}
+                cursor="pointer"
+              >
+                <IconEdit />
+              </FormLabel>
+              <Input type={"file"} display="none" id="upload-img" onChange={handleFileChange} />
+            </Box>
+
+            {!isEmpty(formErrors?.id_card_photo) && <ErrorMessage text={formErrors?.id_card_photo.message} />}
           </FormControl>
           <Stack gap={4} mt={{ base: 4, md: 8 }} align="center">
             <Stack w={"full"} gap={2}>

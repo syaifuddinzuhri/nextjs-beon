@@ -1,4 +1,4 @@
-import { object, ref, string } from "yup";
+import { mixed, object, ref, string } from "yup";
 
 export const loginValidationSchema = object().shape({
   email: string().required(),

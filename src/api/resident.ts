@@ -18,13 +18,20 @@ export const useResidentQuery = (params?: ResidentParams, enabled?: boolean) =>
 
 export const useAddResidentMutation = ({ onSuccess, onError, ...rest }: ResidentMutation<Response<any>>) =>
   useMutation<Response<any>>({
-    mutationFn: async () =>
-      await axios({
+    mutationFn: async () => {
+      const formData = new FormData();
+      Object.keys(rest).forEach((key: any) => {
+        if ((rest as any)[key] !== undefined) {
+          formData.append(key, (rest as any)[key]);
+        }
+      });
+      return await axios({
         method: "post",
         url: "/resident",
         data: rest,
-      }),
-
+        headers: { "content-type": "multipart/form-data", accept: "multipart/form-data" },
+      });
+    },
     onSuccess,
     onError,
   });
