@@ -17,7 +17,7 @@ export interface ResidentResponse {
   name: number;
   id_card_photo?: number;
   phone?: number;
-  status: number;
+  status: string;
   is_married: number;
   created_at: number;
   updated_at: number;

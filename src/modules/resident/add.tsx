@@ -134,7 +134,7 @@ const ResidentAdd: FC = () => {
             {!isEmpty(formErrors?.is_married) && <ErrorMessage text={formErrors?.is_married.message} />}
           </FormControl>
           <FormControl isInvalid={!isEmpty(formErrors?.status)}>
-            <FormLabel>Status Penghuni</FormLabel>
+            <FormLabel>Status Huni</FormLabel>
             <RadioGroup
               value={status}
               onChange={e => {

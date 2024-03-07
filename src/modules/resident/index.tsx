@@ -67,21 +67,47 @@ const Resident: FC = () => {
       cell: info => <Text>{info.getValue()}</Text>,
       header: "Nomor HP",
     }),
+    columnHelper.accessor("is_married", {
+      cell: info => {
+        let typeIsMarried: string;
+        let labelIsMarried: string;
+        switch (info.getValue()) {
+          case 0:
+            typeIsMarried = "cancel";
+            labelIsMarried = "Belum Nikah";
+            break;
+          case 1:
+            typeIsMarried = "success";
+            labelIsMarried = "Sudah Nikah";
+            break;
+          default:
+            labelIsMarried = "Belum Nikah";
+            typeIsMarried = "cancel";
+        }
+        return (
+          <Stack gap={1} alignItems={"center"}>
+            <Tag variant={typeIsMarried}>{labelIsMarried}</Tag>
+          </Stack>
+        );
+      },
+      header: "Status Hubungan",
+      meta: { align: "center" },
+    }),
     columnHelper.accessor("status", {
       cell: info => {
         let typeStatus: string;
         let labelStatus: string;
         switch (info.getValue()) {
-          case 0:
-            typeStatus = "cancel";
-            labelStatus = "Belum Nikah";
-            break;
-          case 1:
+          case "permanent":
             typeStatus = "success";
-            labelStatus = "Sudah Nikah";
+            labelStatus = "Tetap";
+            break;
+          case "contract":
+            typeStatus = "cancel";
+            labelStatus = "Kontrak";
             break;
           default:
-            labelStatus = "Belum Nikah";
+            labelStatus = "Kontrak";
             typeStatus = "cancel";
         }
         return (
@@ -90,7 +116,7 @@ const Resident: FC = () => {
           </Stack>
         );
       },
-      header: "Status",
+      header: "Status Huni",
       meta: { align: "center" },
     }),
     columnHelper.accessor("created_at", {
