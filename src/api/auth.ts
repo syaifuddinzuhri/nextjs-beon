@@ -15,15 +15,3 @@ export const useLoginMutation = ({ onSuccess, onError, ...rest }: LoginMutation<
     onSuccess,
     onError,
   });
-
-export const useLogoutMutation = ({ onSuccess, onError, ...rest }: LogoutMutation<any>) =>
-  useMutation<LoginResponse>({
-    mutationFn: async () =>
-      await axios({
-        method: "post",
-        url: "/auth/logout",
-        data: rest,
-      }),
-    onSuccess,
-    onError,
-  });

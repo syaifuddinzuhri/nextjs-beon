@@ -105,6 +105,18 @@ export const formatDateFullIndonesia = (date: Date) => {
   return date.toLocaleDateString("id-ID", options);
 };
 
+export const formatDateFullIndonesiaWithTime = (date: Date) => {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  };
+  return date.toLocaleDateString("id-ID", options);
+};
+
 export const formatClock = (date: Date) => {
   if (!isValidDate(date)) return "-";
 

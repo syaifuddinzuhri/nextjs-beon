@@ -22,7 +22,7 @@ const ModalWelcome: React.FC<IProps> = ({ open, onClose }) => {
             </Box>
             <Box textAlign={"center"}>
               <Text textStyle={"h3"}>Hi!</Text>
-              <Text textStyle={"h4"}>Selamat Datang di Resellerindo</Text>
+              <Text textStyle={"h4"}>Selamat Datang di Beon</Text>
             </Box>
           </Stack>
         </ModalBody>

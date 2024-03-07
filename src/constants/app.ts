@@ -1,17 +1,17 @@
 const appHead = {
-  defaultTitle: "Resellerindo",
-  titleTemplate: "Reserllerindo - %s",
+  defaultTitle: "Beon",
+  titleTemplate: "Beon - %s",
   openGraph: {
-    title: "Resellerindo",
-    description: "Resellerindo Web App Platform",
+    title: "Beon",
+    description: "Beon Web App Platform",
     locale: "en_US",
-    site_name: "Resellerindo - Platform",
-    url: "Resellerindo - Platform",
+    site_name: "Beon - Platform",
+    url: "Beon - Platform",
   },
   additionalMetaTags: [
     {
       name: "description",
-      content: "Resellerindo Platform",
+      content: "Beon Platform",
     },
     { name: "theme-color", content: "#b59916" },
     { name: "mobile-web-app-capable", content: "yes" },

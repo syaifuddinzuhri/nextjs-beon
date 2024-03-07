@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { IconClose, IconCloseSidebar, IconLogout } from "@/assets/index";
-import { LinkItems, LinkItemsSecond } from "@/constants/menu";
+import { LinkItems } from "@/constants/menu";
 
 import type { SidebarProps } from "../types";
 import NavItem from "./NavItem";

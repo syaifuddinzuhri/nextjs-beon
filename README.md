@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 1.  Make sure that you have Node.js v16.16.0, Yarn and npm v8 or above installed.
 2.  Clone this repo
-3.  Move to the appropriate directory: `cd [resellerindo-v3]`.
+3.  Move to the appropriate directory: `cd [member-nextjs]`.
 4.  Create the `.env.local` based on `.env.example`.
 5.  Run `yarn` in order to install dependencies.<br />
     \_At this point you can run `yarn dev` to see the local app at `http://localhost:3000`.
