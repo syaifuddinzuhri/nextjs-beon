@@ -130,3 +130,14 @@ export function generateErrorOptions(err: any, type?: string): UseToastOptions {
     isClosable: true,
   };
 }
+
+export function isActive(activePath: string | undefined): boolean {
+  if (!activePath) return false; // Handle undefined case
+  const currentPath = window.location.pathname;
+  // Check if currentPath starts with activePath (substring match)
+  if (activePath.endsWith("/*")) {
+    return currentPath.startsWith(activePath.slice(0, -2));
+  } else {
+    return currentPath === activePath;
+  }
+}

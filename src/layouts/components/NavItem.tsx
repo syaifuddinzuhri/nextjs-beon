@@ -20,7 +20,6 @@ const NavItem: React.FC<NavItemProps> = ({
 }) => {
   const router = useRouter();
   const [expand, setExpand] = useState<boolean>(false);
-  // let active = activePath && activePath !== "/" ? router.asPath.includes(activePath) : false;
   let active = activePath && activePath !== "/" ? router.asPath === activePath : false;
 
   if (activePath === "/" && router.asPath === "/") {

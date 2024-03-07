@@ -8,12 +8,10 @@ import { useSearchStore } from "@/stores/search";
 import { formatDateFullIndonesia, formatSortDateSecond } from "@/utils/formatter";
 import { Button, HStack, Icon, Image, Stack, Tag, Text, useMediaQuery, useToast } from "@chakra-ui/react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
-import { useRouter } from "next/router";
 import { useEffect, useState, type FC } from "react";
 
-const Resident: FC = () => {
+const ResidentAdd: FC = () => {
   const toast = useToast();
-  const router = useRouter();
   const [confirm, setConfirm] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<ResidentResponse | null>(null);
 
@@ -127,7 +125,7 @@ const Resident: FC = () => {
 
   return (
     <>
-      <Button size={"xs"} px={2} variant="outline" onClick={() => router.push("/resident/add")}>
+      <Button size={"xs"} px={2} variant="outline">
         Tambah Baru
       </Button>
       <Stack p={{ base: 2, md: 4 }} background={"white"} borderRadius={12} gap={{ base: 3, md: 5 }} mt={6}>
@@ -161,4 +159,4 @@ const Resident: FC = () => {
   );
 };
 
-export default Resident;
+export default ResidentAdd;

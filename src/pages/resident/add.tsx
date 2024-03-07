@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 
 import createNextPage from "@/utils/createNextPage";
-import { DashboardLayout } from "../layouts";
+import DashboardLayout from "@/layouts/DashboardLayout";
 
 const Resident = dynamic(async () => await import("@/modules/resident/index"));
 
