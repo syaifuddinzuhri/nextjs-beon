@@ -1,12 +1,7 @@
 // eslint-disable-next-line import/prefer-default-export
 // eslint-disable-next-line default-param-last
-export const currency = (locales: string | string[] = "id-ID", options?: Intl.NumberFormatOptions) => {
-  return new Intl.NumberFormat(locales, {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
-    ...options,
-  });
+export const currency = (number: number) => {
+  return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(number);
 };
 
 export const elipsisText = (text: string, limitChar = 30) => {

@@ -133,8 +133,6 @@ const ResidentForm: FC = () => {
       });
   };
 
-  console.log(isLoadingDetailResident);
-
   const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== "Enter") return;
     doSubmit();
@@ -243,7 +241,7 @@ const ResidentForm: FC = () => {
             </FormControl>
             <Stack gap={4} mt={{ base: 4, md: 8 }} align="center">
               <Stack w={"full"} gap={2}>
-                <Button w={"full"} onClick={doSubmit} isLoading={isLoadingResident}>
+                <Button w={"full"} onClick={doSubmit} isLoading={isLoadingResident || isLoadingResidentEdit}>
                   Submit
                 </Button>
               </Stack>
