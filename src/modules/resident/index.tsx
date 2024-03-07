@@ -41,7 +41,11 @@ const Resident: FC = () => {
 
   const columns = [
     columnHelper.accessor("id", {
-      cell: (info: CellContext<ResidentResponse, any>) => <Text textAlign={"center"}>{info.row.index + 1}</Text>,
+      cell: (info: CellContext<ResidentResponse, any>) => (
+        <Text textAlign={"center"}>
+          {((pagination?.page || 1) - 1) * (pagination?.perPage || 10) + info.row.index + 1}
+        </Text>
+      ),
       header: "#",
       meta: { align: "center" },
     }),
