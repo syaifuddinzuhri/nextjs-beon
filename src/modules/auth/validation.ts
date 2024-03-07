@@ -5,6 +5,12 @@ export const loginValidationSchema = object().shape({
   password: string().min(8).max(32).required(),
 });
 
+export const residentValidationSchema = object().shape({
+  name: string().required(),
+  phone: string().required(),
+  status: string().required(),
+});
+
 export const registerValidationSchema = object().shape({
   name: string().required(),
   username: string().required(),

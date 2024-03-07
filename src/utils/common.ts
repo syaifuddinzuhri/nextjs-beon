@@ -110,19 +110,23 @@ export function generateErrorOptions(err: any, type?: string): UseToastOptions {
   if (err?.message) {
     if (Array.isArray(err.message)) {
       message = err.message.join("\n");
-    }
-
-    if (typeof err.message === "string") {
+    } else if (typeof err?.message === "object") {
+      const keys = Object.keys(err?.message);
+      if (keys.length > 0) {
+        const firstKey = keys[0];
+        const firstArray = err?.message[firstKey];
+        if (Array.isArray(firstArray) && firstArray.length > 0) {
+          const firstItem = firstArray[0];
+          message = firstItem;
+        }
+      }
+    } else if (typeof err.message === "string") {
       message = err.message;
-    }
-
-    if (message) {
-      message = `: ${message}`;
     }
   }
 
   return {
-    title: `${type} Gagal ${message}`.trim(),
+    title: `${message}`.trim(),
     status: "error",
     variant: "subtle",
     duration: 3000,
