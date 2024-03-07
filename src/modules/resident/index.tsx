@@ -2,15 +2,19 @@ import { useResidentQuery } from "@/api/resident";
 import { IconService, IconUser } from "@/assets/index";
 import { Pagination, Search, ShowData } from "@/components/datatable";
 import { DataTable } from "@/components/datatable/Datatable";
+import ModalMessage from "@/components/modal/ModalMessage";
 import { ResidentResponse } from "@/interfaces/resident";
 import { useSearchStore } from "@/stores/search";
 import { formatDateFullIndonesia, formatSortDateSecond } from "@/utils/formatter";
-import { Button, HStack, Icon, Stack, Tag, Text, useMediaQuery, useToast } from "@chakra-ui/react";
+import { Button, HStack, Icon, Image, Stack, Tag, Text, useMediaQuery, useToast } from "@chakra-ui/react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
-import { useEffect, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 
 const Resident: FC = () => {
   const toast = useToast();
+  const [confirm, setConfirm] = useState<boolean>(false);
+  const [detailData, setDetailData] = useState<ResidentResponse | null>(null);
+
   const { search, filter, pagination } = useSearchStore();
 
   const { data: dataResident, refetch: residentRefetch } = useResidentQuery({
@@ -38,6 +42,16 @@ const Resident: FC = () => {
       cell: (info: CellContext<ResidentResponse, any>) => <Text textAlign={"center"}>{info.row.index + 1}</Text>,
       header: "#",
       meta: { align: "center" },
+    }),
+    columnHelper.accessor("id_card_photo", {
+      cell: info => {
+        const photoSrc =
+          info.row.original.id_card_photo !== undefined || info.row.original.id_card_photo !== null
+            ? String(info.row.original.id_card_photo)
+            : undefined;
+        return <Image borderRadius="md" width={"100px"} src={photoSrc} alt="images" />;
+      },
+      header: "Foto KTP",
     }),
     columnHelper.accessor("name", {
       cell: info => <Text>{info.getValue()}</Text>,
@@ -84,7 +98,15 @@ const Resident: FC = () => {
           <Button size={"xs"} px={2}>
             Edit
           </Button>
-          <Button size={"xs"} px={2} variant="outline">
+          <Button
+            size={"xs"}
+            px={2}
+            variant="outline"
+            onClick={() => {
+              setDetailData(info.row.original);
+              setConfirm(true);
+            }}
+          >
             Hapus
           </Button>
         </HStack>
@@ -93,6 +115,13 @@ const Resident: FC = () => {
       meta: { align: "center" },
     },
   ];
+
+  const closeModal = () => {
+    setDetailData(null);
+    setConfirm(false);
+  };
+
+  const deleteData = () => {};
 
   return (
     <>
@@ -113,6 +142,19 @@ const Resident: FC = () => {
         <DataTable columns={columns} data={dataResident?.data.data || []} />
         <Pagination total={dataResident?.data.last_page || 0} current={dataResident?.data.current_page || 1} />
       </Stack>
+
+      <ModalMessage
+        image="/images/notification/warning.png"
+        title="Konfirmasi!"
+        description="Apakah kamu ingin menghapus data?"
+        button1="Ya"
+        button2="Tidak"
+        open={confirm}
+        type="row"
+        onClose={closeModal}
+        onClick1={deleteData}
+        onClick2={closeModal}
+      />
     </>
   );
 };
