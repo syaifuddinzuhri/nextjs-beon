@@ -8,7 +8,13 @@ import type {
   Response,
 } from "@/interfaces/common";
 import axios from "@/utils/api/callApi";
-import { ResidentDeleteMutation, ResidentMutation, ResidentParams, ResidentResponse } from "@/interfaces/resident";
+import {
+  ResidentDeleteMutation,
+  ResidentEditMutation,
+  ResidentMutation,
+  ResidentParams,
+  ResidentResponse,
+} from "@/interfaces/resident";
 import { AxiosError } from "axios";
 
 export const useResidentQuery = (params?: ResidentParams, enabled?: boolean) =>
@@ -43,6 +49,26 @@ export const useAddResidentMutation = ({ onSuccess, onError, ...rest }: Resident
     onError,
   });
 
+export const useEditResidentMutation = ({ id, onSuccess, onError, ...rest }: ResidentEditMutation<Response<any>>) =>
+  useMutation<Response<any>>({
+    mutationFn: async () => {
+      const formData = new FormData();
+      Object.keys(rest).forEach((key: any) => {
+        if ((rest as any)[key] !== undefined) {
+          formData.append(key, (rest as any)[key]);
+        }
+      });
+      return await axios({
+        method: "post",
+        url: `/resident/${id}?_method=PUT`,
+        data: rest,
+        headers: { "content-type": "multipart/form-data", accept: "multipart/form-data" },
+      });
+    },
+    onSuccess,
+    onError,
+  });
+
 export const useDeleteResidentMutation = ({
   onSuccess,
   onError,
@@ -58,3 +84,14 @@ export const useDeleteResidentMutation = ({
     onError,
   });
 };
+
+export const useResidentDetailQuery = (id: number, enabled?: boolean) =>
+  useQuery<QueryPropsDetail<ResidentResponse>, Error>({
+    queryKey: ["resident-detail"],
+    queryFn: () =>
+      axios<QueryPropsDetail<ResidentResponse>>({
+        method: "get",
+        url: `/resident/${id}`,
+      }),
+    enabled,
+  });

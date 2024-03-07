@@ -14,13 +14,13 @@ export interface ResidentParams extends PaginationParams {
 
 export interface ResidentResponse {
   id: number;
-  name: number;
-  id_card_photo?: number;
-  phone?: number;
+  name: string;
+  id_card_photo?: string;
+  phone?: string;
   status: string;
-  is_married: number;
-  created_at: number;
-  updated_at: number;
+  is_married: string | number;
+  created_at: Date | null;
+  updated_at: Date | null;
 }
 
 export interface ResidentData {
@@ -36,3 +36,7 @@ export interface ResidentDeleteMutation {
 }
 
 export interface ResidentMutation<T> extends MutationProps<T>, ResidentData {}
+
+export interface ResidentEditMutation<T> extends MutationProps<T>, ResidentData {
+  id: number;
+}

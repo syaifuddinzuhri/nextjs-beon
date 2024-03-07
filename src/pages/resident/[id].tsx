@@ -4,12 +4,12 @@ import dynamic from "next/dynamic";
 import createNextPage from "@/utils/createNextPage";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
-const ResidentFormAdd = dynamic(async () => await import("@/modules/resident/form"));
+const ResidentFormEdit = dynamic(async () => await import("@/modules/resident/form"));
 
-const ResidentAddFormPage: NextPage = () => {
-  return <ResidentFormAdd />;
+const ResidentFormEditPage: NextPage = () => {
+  return <ResidentFormEdit />;
 };
 
-export default createNextPage(ResidentAddFormPage, {
+export default createNextPage(ResidentFormEditPage, {
   layout: children => <DashboardLayout>{children}</DashboardLayout>,
 });

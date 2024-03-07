@@ -120,14 +120,20 @@ const Resident: FC = () => {
       meta: { align: "center" },
     }),
     columnHelper.accessor("created_at", {
-      cell: info => formatDateFullIndonesia(new Date(info.getValue())),
+      cell: info => formatDateFullIndonesia(new Date(info.getValue() || "")),
       header: "Tanggal Dibuat",
     }),
     {
       id: "action", // using "action" as a unique identifier
       cell: (info: any) => (
         <HStack gap={1} justifyContent="center">
-          <Button size={"xs"} px={2}>
+          <Button
+            size={"xs"}
+            px={2}
+            onClick={() => {
+              router.push(`/resident/${info.row.original.id}`);
+            }}
+          >
             Edit
           </Button>
           <Button
