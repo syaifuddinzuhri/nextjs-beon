@@ -1,8 +1,15 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import type { QueryPropsDetail, QueryPropsList, QueryPropsSimpleList, Response } from "@/interfaces/common";
+import type {
+  MutationProps,
+  QueryPropsDetail,
+  QueryPropsList,
+  QueryPropsSimpleList,
+  Response,
+} from "@/interfaces/common";
 import axios from "@/utils/api/callApi";
-import { ResidentMutation, ResidentParams, ResidentResponse } from "@/interfaces/resident";
+import { ResidentDeleteMutation, ResidentMutation, ResidentParams, ResidentResponse } from "@/interfaces/resident";
+import { AxiosError } from "axios";
 
 export const useResidentQuery = (params?: ResidentParams, enabled?: boolean) =>
   useQuery<QueryPropsList<ResidentResponse>, Error>({
@@ -35,3 +42,19 @@ export const useAddResidentMutation = ({ onSuccess, onError, ...rest }: Resident
     onSuccess,
     onError,
   });
+
+export const useDeleteResidentMutation = ({
+  onSuccess,
+  onError,
+}: MutationProps<QueryPropsDetail<boolean>, AxiosError, ResidentDeleteMutation>) => {
+  return useMutation<QueryPropsDetail<boolean>, AxiosError, ResidentDeleteMutation>({
+    mutationFn: async ({ ...data }: ResidentDeleteMutation) =>
+      await axios({
+        method: "delete",
+        url: `/resident/${data.id}`,
+      }),
+
+    onSuccess,
+    onError,
+  });
+};

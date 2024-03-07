@@ -1,4 +1,4 @@
-import { useResidentQuery } from "@/api/resident";
+import { useDeleteResidentMutation, useResidentQuery } from "@/api/resident";
 import { IconService, IconUser } from "@/assets/index";
 import { Pagination, Search, ShowData } from "@/components/datatable";
 import { DataTable } from "@/components/datatable/Datatable";
@@ -123,7 +123,37 @@ const Resident: FC = () => {
     setConfirm(false);
   };
 
-  const deleteData = () => {};
+  const { mutate: doDelete } = useDeleteResidentMutation({
+    onSuccess: () => {
+      closeModal();
+
+      toast({
+        title: "Data berhasil Dihapus",
+        description: "Anda berhasil menghapus data",
+        status: "success",
+        variant: "subtle",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+      residentRefetch();
+    },
+    onError: (e: any) =>
+      toast({
+        title: `Data Gagal Dihapus: ${e.message}`,
+        status: "error",
+        variant: "subtle",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      }),
+  });
+
+  const deleteData = () => {
+    if (detailData) {
+      doDelete({ id: detailData?.id });
+    }
+  };
 
   return (
     <>

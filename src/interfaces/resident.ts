@@ -31,4 +31,8 @@ export interface ResidentData {
   id_card_photo: File | null;
 }
 
+export interface ResidentDeleteMutation {
+  id: number;
+}
+
 export interface ResidentMutation<T> extends MutationProps<T>, ResidentData {}
