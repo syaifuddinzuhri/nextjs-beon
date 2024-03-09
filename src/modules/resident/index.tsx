@@ -107,8 +107,8 @@ const Resident: FC = () => {
             labelStatus = "Kontrak";
             break;
           default:
-            labelStatus = "Kontrak";
-            typeStatus = "cancel";
+            labelStatus = "";
+            typeStatus = "";
         }
         return (
           <Stack gap={1} alignItems={"center"}>

@@ -13,6 +13,7 @@ import FormHouse from "./form";
 import ModalMessage from "@/components/modal/ModalMessage";
 import { formatDateFullIndonesia } from "@/utils/formatter";
 import FormHouseholder from "../householder/form";
+import HistoryHouseholder from "../householder/history";
 
 const HousePage = () => {
   const toast = useToast();
@@ -90,14 +91,14 @@ const HousePage = () => {
       meta: { align: "center" },
     }),
     columnHelper.accessor("active_householder.resident.name", {
-      cell: info => <Text>{info.getValue()}</Text>,
+      cell: info => <Text>{info?.row?.original?.active_householder?.resident?.name}</Text>,
       header: "Penghuni",
     }),
     columnHelper.accessor("active_householder.resident.status", {
       cell: info => {
         let typeStatus: string;
         let labelStatus: string;
-        switch (info.getValue()) {
+        switch (info?.row?.original?.active_householder?.resident?.status) {
           case "permanent":
             typeStatus = "success";
             labelStatus = "Tetap";
@@ -120,17 +121,17 @@ const HousePage = () => {
       meta: { align: "center" },
     }),
     columnHelper.accessor("active_householder.start_date", {
-      cell: info => <Text>{info.getValue() && formatDateFullIndonesia(new Date(info.getValue() || ""))}</Text>,
+      cell: info => <Text>{info?.row?.original?.active_householder?.start_date && formatDateFullIndonesia(new Date(info?.row?.original?.active_householder?.start_date || ""))}</Text>,
       header: "Tanggal Mulai",
     }),
     columnHelper.accessor("active_householder.end_date", {
-      cell: info => <Text>{info.getValue() && formatDateFullIndonesia(new Date(info.getValue() || ""))}</Text>,
+      cell: info => <Text>{info?.row?.original?.active_householder?.end_date && formatDateFullIndonesia(new Date(info?.row?.original?.active_householder?.end_date || ""))}</Text>,
       header: "Tanggal Berakhir",
     }),
     {
       id: "action",
       cell: (info: any) => (
-        <HStack gap={1} justifyContent="center">
+        <HStack gap={1} justifyContent="right">
           <Button
             size={"xs"}
             px={2}
@@ -150,7 +151,7 @@ const HousePage = () => {
             px={2}
             onClick={() => {
               setDetailData(info.row.original);
-              setFormModal(true);
+              setHistoryHouseholderModal(true);
             }}
           >
             Riwayat Penghuni
@@ -210,6 +211,12 @@ const HousePage = () => {
   const closeFormHouseholderModal = () => {
     setDetailData(null);
     setFormHouseholderModal(false);
+    houseRefetch();
+  };
+
+  const closeHistoryHouseholderModal = () => {
+    setDetailData(null);
+    setHistoryHouseholderModal(false);
     houseRefetch();
   };
 
@@ -276,7 +283,7 @@ const HousePage = () => {
         open={formModal}
         onClose={closeFormModal}
         size="xl"
-        title={detailData ? "Form Edit Jenis Pembayaran" : "Form Tambah Jenis Pembayaran"}
+        title={detailData ? "Form Edit Rumah" : "Form Tambah Rumah"}
       >
         <FormHouse id={detailData?.id || undefined} onClose={closeFormModal} />
       </ModalData>
@@ -288,6 +295,15 @@ const HousePage = () => {
         title={"Form Penghuni Rumah"}
       >
         <FormHouseholder id={detailData?.id || undefined} onClose={closeFormHouseholderModal} />
+      </ModalData>
+
+      <ModalData
+        open={historyHouseholderModal}
+        onClose={closeHistoryHouseholderModal}
+        size="full"
+        title={"Riwayat Penghuni Rumah"}
+      >
+        <HistoryHouseholder id={detailData?.id || undefined} onClose={closeHistoryHouseholderModal} />
       </ModalData>
 
       <ModalMessage
