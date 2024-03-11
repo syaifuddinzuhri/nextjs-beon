@@ -47,7 +47,7 @@ const SpendingForm: FC = () => {
   const [paymentTypeId, setPaymentTypeId] = useState<number | null>(null);
   const [date, setDate] = useState(new Date());
   const [searchPaymentType, setSearchPaymentType] = useState("");
-  const [month, setMonth] = useState<number>(new Date().getMonth());
+  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [nominal, setNominal] = useState<number>(0);
 

@@ -44,7 +44,7 @@ const IncomeForm: FC = () => {
   const [paymentTypeId, setPaymentTypeId] = useState<number | null>(null);
   const [nominal, setNominal] = useState<number>(0);
   const [residentId, setResidentId] = useState<number | null>(null);
-  const [month, setMonth] = useState<number>(new Date().getMonth());
+  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [paymentMethod, setPaymentMethod] = useState("monthly");
   const [searchPaymentType, setSearchPaymentType] = useState("");

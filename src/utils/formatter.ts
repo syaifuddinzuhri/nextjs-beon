@@ -9,7 +9,7 @@ export const elipsisText = (text: string, limitChar = 30) => {
   return text;
 };
 
-export const getMonthName = (month: number) => {
+export const getMonthName = (month: number, index = true) => {
   const monthNames = [
     "Januari",
     "Februari",
@@ -24,6 +24,7 @@ export const getMonthName = (month: number) => {
     "November",
     "Desember",
   ];
+  if (!index) return monthNames[month - 1];
   return monthNames[month];
 };
 

@@ -9,7 +9,7 @@ import type {
 } from "@/interfaces/common";
 import axios from "@/utils/api/callApi";
 import { AxiosError } from "axios";
-import { PaymentIncomeMutation, PaymentMutation, PaymentParams, PaymentResponse, PaymentSpendingMutation } from "@/interfaces/payment";
+import { PaymentDeleteMutation, PaymentIncomeMutation, PaymentMutation, PaymentParams, PaymentResponse, PaymentSpendingMutation } from "@/interfaces/payment";
 
 export const usePaymentQuery = (params?: PaymentParams, enabled?: boolean) =>
   useQuery<QueryPropsList<PaymentResponse>, Error>({
@@ -48,3 +48,19 @@ export const useAddPaymentSpendingMutation = ({ onSuccess, onError, ...rest }: P
     onSuccess,
     onError,
   });
+
+export const useDeletePaymentMutation = ({
+  onSuccess,
+  onError,
+}: MutationProps<QueryPropsDetail<boolean>, AxiosError, PaymentDeleteMutation>) => {
+  return useMutation<QueryPropsDetail<boolean>, AxiosError, PaymentDeleteMutation>({
+    mutationFn: async ({ ...data }: PaymentDeleteMutation) =>
+      await axios({
+        method: "delete",
+        url: `/payment/${data.id}`,
+      }),
+
+    onSuccess,
+    onError,
+  });
+};

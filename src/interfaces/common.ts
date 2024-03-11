@@ -43,7 +43,7 @@ export interface QueryPropsList<T> {
 }
 
 export interface QueryPropsSimpleList<T> {
-  data: T[];
+  data: T;
   status: boolean;
   message: string;
 }
