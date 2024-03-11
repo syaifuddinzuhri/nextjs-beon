@@ -87,7 +87,7 @@ export const useDeleteResidentMutation = ({
 
 export const useResidentDetailQuery = (id: number, enabled?: boolean) =>
   useQuery<QueryPropsDetail<ResidentResponse>, Error>({
-    queryKey: ["resident-detail"],
+    queryKey: [`resident-detail-${id}`],
     queryFn: () =>
       axios<QueryPropsDetail<ResidentResponse>>({
         method: "get",

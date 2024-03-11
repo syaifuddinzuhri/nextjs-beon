@@ -10,6 +10,7 @@ export interface ResidentValidation {
 
 export interface ResidentParams extends PaginationParams {
   keyword?: string;
+  status?: string | null;
 }
 
 export interface ResidentResponse {
@@ -19,8 +20,6 @@ export interface ResidentResponse {
   phone?: string;
   status: string;
   is_married: string | number;
-  created_at: Date | null;
-  updated_at: Date | null;
 }
 
 export interface ResidentData {
@@ -35,7 +34,7 @@ export interface ResidentDeleteMutation {
   id: number;
 }
 
-export interface ResidentMutation<T> extends MutationProps<T>, ResidentData {}
+export interface ResidentMutation<T> extends MutationProps<T>, ResidentData { }
 
 export interface ResidentEditMutation<T> extends MutationProps<T>, ResidentData {
   id: number;

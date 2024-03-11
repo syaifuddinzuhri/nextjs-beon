@@ -148,3 +148,65 @@ export const toNormalText = (val: string) => {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 };
+
+export const getMonthYear = (startMonth: number, startYear: number, count: number) => {
+  let result = [];
+  let month = startMonth;
+  let year = startYear;
+
+  for (let i = 0; i < count; i++) {
+    let nextMonth = (month + i) % 12;
+    let nextYear = year + Math.floor((month + i) / 12);
+
+    if (nextMonth === 0) {
+      nextMonth = 12;
+      nextYear--;
+    }
+
+    let monthName = new Date(nextYear, nextMonth - 1, 1).toLocaleString('id', { month: 'long' });
+
+    result.push({
+      monthName: monthName,
+      month: nextMonth,
+      year: nextYear
+    });
+  }
+  return result;
+}
+
+export const getMonthOptions = () => {
+  let monthsList = [];
+
+  for (let i = 0; i < 12; i++) {
+    let monthName = new Date(2000, i, 1).toLocaleString('id', { month: 'long' });
+    monthsList.push({
+      label: monthName,
+      value: i + 1
+    });
+  }
+  return monthsList;
+}
+
+export const getMonthNow = (month: number) => {
+  let yearNow = new Date().getFullYear();
+  let monthName = new Date(yearNow, month - 1, 1).toLocaleString('id', { month: 'long' });
+  return {
+    label: monthName,
+    value: month
+  }
+}
+
+export const getYearOptions = () => {
+  const currentYear = new Date().getFullYear();
+  const startYear = 2010;
+  const numYears = currentYear - startYear + 1;
+  let yearsList = [];
+
+  for (let i = numYears - 1; i >= 0; i--) {
+    yearsList.push({
+      label: startYear + i,
+      value: startYear + i
+    });
+  }
+  return yearsList;
+}

@@ -11,8 +11,6 @@ export interface HouseResponse {
   house_number?: string;
   status: number;
   active_householder?: HouseHolderResponse;
-  created_at: Date | null;
-  updated_at: Date | null;
 }
 
 export interface HouseData {
@@ -25,7 +23,7 @@ export interface HouseDeleteMutation {
   id: number;
 }
 
-export interface HouseMutation<T> extends MutationProps<T>, HouseData {}
+export interface HouseMutation<T> extends MutationProps<T>, HouseData { }
 
 export interface HouseEditMutation<T> extends MutationProps<T>, HouseData {
   id: number;

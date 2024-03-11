@@ -99,11 +99,11 @@ const Resident: FC = () => {
         let labelStatus: string;
         switch (info.getValue()) {
           case "permanent":
-            typeStatus = "success";
+            typeStatus = "progress";
             labelStatus = "Tetap";
             break;
           case "contract":
-            typeStatus = "cancel";
+            typeStatus = "wait";
             labelStatus = "Kontrak";
             break;
           default:
@@ -118,10 +118,6 @@ const Resident: FC = () => {
       },
       header: "Status Huni",
       meta: { align: "center" },
-    }),
-    columnHelper.accessor("created_at", {
-      cell: info => formatDateFullIndonesia(new Date(info.getValue() || "")),
-      header: "Tanggal Dibuat",
     }),
     {
       id: "action", // using "action" as a unique identifier

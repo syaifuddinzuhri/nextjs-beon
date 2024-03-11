@@ -78,7 +78,7 @@ export const useDeletePaymentTypeMutation = ({
 
 export const usePaymentTypeDetailQuery = (id: number, enabled?: boolean) =>
   useQuery<QueryPropsDetail<PaymentTypeResponse>, Error>({
-    queryKey: ["payment-type-detail"],
+    queryKey: [`payment-type-detail-${id}`],
     queryFn: () =>
       axios<QueryPropsDetail<PaymentTypeResponse>>({
         method: "get",

@@ -100,11 +100,11 @@ const HousePage = () => {
         let labelStatus: string;
         switch (info?.row?.original?.active_householder?.resident?.status) {
           case "permanent":
-            typeStatus = "success";
+            typeStatus = "progress";
             labelStatus = "Tetap";
             break;
           case "contract":
-            typeStatus = "cancel";
+            typeStatus = "wait";
             labelStatus = "Kontrak";
             break;
           default:
@@ -156,19 +156,6 @@ const HousePage = () => {
           >
             Riwayat Penghuni
           </Button>
-          {info.row.original.active_householder && info.row.original.status == 1 && (
-            <Button
-              size={"xs"}
-              px={2}
-              onClick={() => {
-                setDetailData(info.row.original);
-                setFormModal(true);
-              }}
-              colorScheme="twitter"
-            >
-              Pembayaran
-            </Button>
-          )}
           <Button
             size={"xs"}
             px={2}

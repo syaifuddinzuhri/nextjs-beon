@@ -56,11 +56,11 @@ const HistoryHouseholder = ({ id, onClose }: IProps) => {
         let labelStatus: string;
         switch (info?.row?.original?.resident?.status) {
           case "permanent":
-            typeStatus = "success";
+            typeStatus = "progress";
             labelStatus = "Tetap";
             break;
           case "contract":
-            typeStatus = "cancel";
+            typeStatus = "wait";
             labelStatus = "Kontrak";
             break;
           default:

@@ -4,6 +4,7 @@ import "@fontsource/inter/700.css";
 import "@fontsource/inter/900.css";
 import "@fontsource/roboto/700.css";
 import "../styles/carousel.css";
+import 'react-datetime/css/react-datetime.css';
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

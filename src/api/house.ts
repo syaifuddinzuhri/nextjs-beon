@@ -67,7 +67,7 @@ export const useDeleteHouseMutation = ({
 
 export const useHouseDetailQuery = (id: number, enabled?: boolean) =>
   useQuery<QueryPropsDetail<HouseResponse>, Error>({
-    queryKey: ["house-detail"],
+    queryKey: [`house-detail-${id}`],
     queryFn: () =>
       axios<QueryPropsDetail<HouseResponse>>({
         method: "get",

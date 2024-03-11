@@ -2,6 +2,7 @@ import { FormError, MutationProps, PaginationParams } from "./common";
 
 export interface PaymentTypeParams extends PaginationParams {
   keyword?: string;
+  type?: string | null;
 }
 
 export interface PaymentTypeResponse {
@@ -9,8 +10,6 @@ export interface PaymentTypeResponse {
   name: string;
   type: string;
   nominal: number;
-  created_at: Date | null;
-  updated_at: Date | null;
 }
 
 export interface PaymentTypeData {
@@ -23,7 +22,7 @@ export interface PaymentTypeDeleteMutation {
   id: number;
 }
 
-export interface PaymentTypeMutation<T> extends MutationProps<T>, PaymentTypeData {}
+export interface PaymentTypeMutation<T> extends MutationProps<T>, PaymentTypeData { }
 
 export interface PaymentTypeEditMutation<T> extends MutationProps<T>, PaymentTypeData {
   id: number;

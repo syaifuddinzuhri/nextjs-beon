@@ -108,6 +108,35 @@ const theme = extendTheme(
       },
     },
     components: {
+      MonthPicker: {
+        baseStyle: {
+          border: "1px solid #ccc",
+          borderRadius: "md",
+          boxShadow: "md",
+          padding: "2",
+          maxWidth: "200px", // Adjust as needed
+          bg: "white", // Background color
+          fontFamily: "inherit" // Use the same font as Chakra UI
+        },
+        parts: ['picker', 'month', 'today'],
+        variants: {
+          default: {
+            picker: {
+              width: "100%",
+              bg: "white", // Background color
+              border: "none"
+            },
+            month: {
+              cursor: "pointer",
+              color: "#333" // Month text color
+            },
+            today: {
+              borderRadius: "50%",
+              border: "1px solid #3182ce" // Today border color
+            }
+          }
+        }
+      },
       FormLabel: {
         baseStyle: {
           fontSize: "sm",
@@ -242,6 +271,7 @@ const theme = extendTheme(
         },
       },
       // Radio: RadioTheme,
+
     },
     config,
   },

@@ -1,4 +1,5 @@
 import { MutationProps, PaginationParams } from "./common";
+import { HouseResponse } from "./house";
 import { ResidentResponse } from "./resident";
 export interface HousehoulderParams extends PaginationParams {
   keyword?: string;
@@ -11,8 +12,7 @@ export interface HouseHolderResponse {
   is_done: number;
   start_date: Date | null;
   end_date: Date | null;
-  created_at: Date | null;
-  updated_at: Date | null;
+  house: HouseResponse | null,
   resident: ResidentResponse | null;
 }
 export interface HouseholderData {
